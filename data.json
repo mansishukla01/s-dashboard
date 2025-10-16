@@ -1,0 +1,60 @@
+{
+  "students": [
+    {
+      "roll": 1,
+      "name": "Mahi Shukla",
+      "studentClass": "10th",
+      "marks": 89
+    },
+    {
+      "roll": 2,
+      "name": "Rahul Verma",
+      "studentClass": "10th",
+      "marks": 95
+    },
+    {
+      "roll": 3,
+      "name": "Priya Singh",
+      "studentClass": "10th",
+      "marks": 78
+    },
+    {
+      "roll": 4,
+      "name": "Aman Gupta",
+      "studentClass": "10th",
+      "marks": 92
+    },
+    {
+      "roll": 5,
+      "name": "Sneha Sharma",
+      "studentClass": "10th",
+      "marks": 88
+    },
+    {
+      "roll": 6,
+      "name": "Karan Patel",
+      "studentClass": "10th",
+      "marks": 83
+    },
+    {
+      "roll": 7,
+      "name": "Neha Jain",
+      "studentClass": "10th",
+      "marks": 91
+    },
+    {
+      "roll": 8,
+      "name": "Ravi Mehta",
+      "studentClass": "10th",
+      "marks": 76
+    },
+    {
+      "roll": 9,
+      "name": "Anjali Thakur",
+      "studentClass": "10th",
+      "marks": 94
+    }
+    
+    
+  ]
+}
