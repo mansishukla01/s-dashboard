@@ -1,83 +1,86 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-
+import {Routes, Route, NavLink, useNavigate} from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import SearchBar from "./components/SearchBar";
 import Button from "./components/Button";
 import DashboardContent from "./components/DashboardContent";
 import Table from "./components/Table";
-
 import Dashboard from "./pages/Dashboard";
 import AddStudent from "./pages/AddStudent";
 import StudentDetails from "./pages/StudentDetails";
 
 
-
 function App() {
+  const [allStudents, setAllStudents] = useState([]);
   const [students, setStudents] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch("http://localhost:4002/students")
       .then((res) => res.json())
       .then((data) => {
-        console.log("Fetched data:", data);
         setStudents(data);
+        setAllStudents(data);
       })
       .catch((err) => console.error("Error fetching data:", err));
   }, []);
 
-  
-  const handleSearch = (query) => {
-    const filtered = students.filter((student) =>
-      student.name.toLowerCase().includes(query.toLowerCase())
-    );
+  const handleSearch = ({ roll, name, studentClass, marks }) => {
+    const filtered = allStudents.filter((student) => {
+      return (
+        (roll === "" || student.roll.toString() === roll) &&
+        (name === "" || student.name.toLowerCase().includes(name.toLowerCase())) &&
+        (studentClass === "" ||
+          student.studentClass.toLowerCase().includes(studentClass.toLowerCase())) &&
+        (marks === "" || student.marks.toString() === marks)
+      );
+    });
     setStudents(filtered);
   };
 
   return (
-    <BrowserRouter>
+    <>
+  
       <Header/>
-
-      
-      <nav
-        style={{
-          display: "flex",
-          gap: "20px",
-          justifyContent: "center",
-          margin: "20px 0",
-        }}>
-        <Link to="/">Dashboard</Link>
-        <Link to="/add-student">Add Student</Link>
-        <Link to="/student-details">Student Details</Link>
-        <Link to="/about">About</Link>
+      <nav>
+        <NavLink to="/" className={({ isActive }) => isActive ? 'active' : ''}>
+          Dashboard
+        </NavLink>
+        <NavLink to="/add-student" className={({ isActive }) => isActive ? 'active' : ''}>
+          Add Student
+        </NavLink>
+        <NavLink to="/student-details" className={({ isActive }) => isActive ? 'active' : ''}>
+          Student Details
+        </NavLink>
       </nav>
 
       <Routes>
-    
         <Route
           path="/"
           element={
-            <>
-              <SearchBar onSearch={handleSearch}/>
+            <div className="page-container">
+              <SearchBar onSearch={handleSearch} />
+              <Table students={students} />
               <DashboardContent />
-              <Table students={students}/>
-              <Button
-                label="Students Detail"
-                onClick={() => alert("Successfully Clicked!")}/>
-            </>
+              <div className="centered-action">
+                <Button
+                  label="Students Detail"
+                  onClick={() => navigate('/student-details', { state: { students } })}/>
+              </div>
+            </div>
           }/>
-
-       
-        <Route path="/add-student" element={<AddStudent />}/>
-        <Route path="/student-details" element={<StudentDetails />}/>
-        </Routes>
-    
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/add-student" element={<AddStudent />} />
+        <Route path="/student-details" element={<StudentDetails />} />
+      </Routes>
       <Footer/>
-    </BrowserRouter>
-    
+      </>
   );
 }
 
 export default App;
+
+
+
 

@@ -1,47 +1,72 @@
 import React, { useState } from "react";
 
 const SearchBar = ({ onSearch }) => {
-  const [roll,setRoll]=useState("");
-  const [name,setName]=useState("");
-  const [studentClass,setStudentClass]=useState("");
-  const [marks,setMarks]=useState("");
 
+  const [filters, setFilters] = useState({
+    roll: "",
+    name: "",
+    studentClass: "",
+    marks: "",
+  });
 
+  
+  const handleChange = (e) => {
+    setFilters({
+      ...filters,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  
   const handleSearch = () => {
-    onSearch(roll,name,studentClass,marks);
+    onSearch(filters); 
   };
 
   return (
-    <div className="search-bar">
-       <input
-        type="text"
-        placeholder="Roll"
-        value={roll}
-        onChange={(e) => setRoll(e.target.value)}/>
-      <button onClick={handleSearch}>Roll</button>
-
-      <input
-        type="text"
-        placeholder="Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}/>
-      <button onClick={handleSearch}>Name</button>
-
-      <input
-        type="text"
-        placeholder="studentClass"
-        value={studentClass}
-        onChange={(e) => setStudentClass(e.target.value)}/>
-      <button onClick={handleSearch}>Class</button>
-
-      <input 
-      type="text"
-      placeholder="Marks"
-      value={marks}
-      onChange={(e)=> setMarks(e.target.value)}/>
-      <button onClick={handleSearch}>Marks</button>
+    <div className="student-form" role="search">
+      <div className="search-inputs-wrapper">
+        <input
+          className="search-input"
+          type="text"
+          name="roll"
+          placeholder="Search by Roll"
+          value={filters.roll}
+          onChange={handleChange}
+          aria-label="search by roll"/>
+        <input
+          className="search-input"
+          type="text"
+          name="name"
+          placeholder="Search by Name"
+          value={filters.name}
+          onChange={handleChange}
+          aria-label="search by name"/>
+        <input
+          className="search-input"
+          type="text"
+          name="studentClass"
+          placeholder="Search by Class"
+          value={filters.studentClass}
+          onChange={handleChange}
+          aria-label="search by class"/>
+        <input
+          className="search-input"
+          type="text"
+          name="marks"
+          placeholder="Search by Marks"
+          value={filters.marks}
+          onChange={handleChange}
+          aria-label="search by marks"/>
+        <button className="search-button btn" onClick={handleSearch} aria-label="search">
+          Search
+        </button>
+      </div>
     </div>
   );
 };
 
 export default SearchBar;
+
+
+
+

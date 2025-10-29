@@ -1,60 +1,60 @@
 {
   "students": [
     {
-      "roll": 1,
-      "name": "Mahi Shukla",
-      "studentClass": "10th",
-      "marks": 89
+      "id": 1,
+      "roll": "101",
+      "name": "A",
+      "marks": "90",
+      "studentClass": "12A"
     },
     {
-      "roll": 2,
-      "name": "Rahul Verma",
-      "studentClass": "10th",
-      "marks": 95
+      "id": 2,
+      "roll": "102",
+      "name": "B",
+      "marks": "85",
+      "studentClass": "12B"
     },
     {
-      "roll": 3,
-      "name": "Priya Singh",
-      "studentClass": "10th",
-      "marks": 78
+      "id": 3,
+      "roll": "103",
+      "name": "C",
+      "marks": "92",
+      "studentClass": "12A"
     },
     {
-      "roll": 4,
-      "name": "Aman Gupta",
-      "studentClass": "10th",
-      "marks": 92
+      "id": 4,
+      "roll": "104",
+      "name": "D",
+      "marks": "88",
+      "studentClass": "12C"
     },
     {
-      "roll": 5,
-      "name": "Sneha Sharma",
+      "roll": "901",
+      "name": "rag",
+      "marks": "90",
       "studentClass": "10th",
-      "marks": 88
+      "id": 5
     },
     {
-      "roll": 6,
-      "name": "Karan Patel",
+      "roll": "902",
+      "name": "test",
+      "marks": "90",
       "studentClass": "10th",
-      "marks": 83
+      "id": 6
     },
     {
-      "roll": 7,
-      "name": "Neha Jain",
+      "roll": "1",
+      "name": "Test1",
+      "marks": "85",
       "studentClass": "10th",
-      "marks": 91
+      "id": 7
     },
     {
-      "roll": 8,
-      "name": "Ravi Mehta",
+      "roll": "1",
+      "name": "Test1",
+      "marks": "85",
       "studentClass": "10th",
-      "marks": 76
-    },
-    {
-      "roll": 9,
-      "name": "Anjali Thakur",
-      "studentClass": "10th",
-      "marks": 94
+      "id": 8
     }
-    
-    
   ]
 }
