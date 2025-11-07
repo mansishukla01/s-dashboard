@@ -2,42 +2,68 @@ import React, { useEffect, useState } from "react";
 import SearchBar from "../components/SearchBar";
 import Table from "../components/Table";
 import { useStudents } from "../context/StudentContext";
+import { useSearchParams } from "react-router-dom";
 
 const Dashboard = () => {
   const { students: allStudents, fetchStudents } = useStudents();
   const [students, setStudents] = useState([]);
 
+  const [searchParams, setSearchParams] = useSearchParams();
+
   useEffect(() => {
     fetchStudents();
   }, [fetchStudents]);
 
+
   useEffect(() => {
-    setStudents(allStudents);
-  }, [allStudents]);
+    const roll = searchParams.get("roll") || "";
+    const name = searchParams.get("name") || "";
+    const studentClass = searchParams.get("class") || "";
+    const marks = searchParams.get("marks") || "";
 
-  const handleSearch = ({ roll, name, studentClass, marks }) => {
-  const filtered = allStudents.filter((student) => {
-    return (
-      (roll === "" || student.roll.toString().includes(roll)) &&
-      (name === "" || student.name.toLowerCase().includes(name.toLowerCase())) &&
-      (studentClass === "" ||
-        student.studentClass.toLowerCase().includes(studentClass.toLowerCase())) &&
-      (marks === "" || student.marks.toString().includes(marks))
-    );
-  });
+    const filtered = allStudents.filter((student) => {
+      return (
+        (roll === "" || student.roll.toString().includes(roll)) &&
+        (name === "" || student.name.toLowerCase().includes(name.toLowerCase())) &&
+        (studentClass === "" ||
+          student.studentClass.toLowerCase().includes(studentClass.toLowerCase())) &&
+        (marks === "" || student.marks.toString().includes(marks))
+      );
+    });
 
-  setStudents(filtered);
-};
+    setStudents(filtered);
+  }, [allStudents, searchParams]);
 
+  const handleSearch = (filters) => {
+    const { roll, name, studentClass, marks } = filters;
+
+    const params = {};
+
+    if (roll) params.roll = roll;
+    if (name) params.name = name;
+    if (studentClass) params.class = studentClass;
+    if (marks) params.marks = marks;
+
+    setSearchParams(params);
+  };
 
   return (
     <div className="page-container">
       <h1 className="page-title">Student Dashboard</h1>
-      <SearchBar onSearch={handleSearch} />
+      <SearchBar
+        onSearch={handleSearch}
+        initialValues={{
+          roll: searchParams.get("roll") || "",
+          name: searchParams.get("name") || "",
+          studentClass: searchParams.get("class") || "",
+          marks: searchParams.get("marks") || "",
+        }}
+      />
       <Table students={students} />
     </div>
   );
 };
 
 export default Dashboard;
+
 

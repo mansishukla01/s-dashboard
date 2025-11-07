@@ -1,28 +1,6 @@
 {
   "students": [
     {
-      "id": 1,
-      "roll": "101",
-      "name": "A",
-      "marks": "90",
-      "studentClass": "12A"
-    },
-    {
-      "id": 2,
-      "roll": "102",
-      "name": "B",
-      "marks": "85",
-      "studentClass": "12B"
-    },
-    {
-      "id": 3,
-      "roll": "103",
-      "name": "C",
-      "marks": "92",
-      "studentClass": "12A"
-    },
-    {
-      "id": 4,
       "roll": "104",
       "name": "D",
       "marks": "88",
@@ -32,29 +10,13 @@
       "roll": "901",
       "name": "rag",
       "marks": "90",
-      "studentClass": "10th",
-      "id": 5
+      "studentClass": "10th"
     },
     {
       "roll": "902",
       "name": "test",
       "marks": "90",
-      "studentClass": "10th",
-      "id": 6
-    },
-    {
-      "roll": "1",
-      "name": "Test1",
-      "marks": "85",
-      "studentClass": "10th",
-      "id": 7
-    },
-    {
-      "roll": "1",
-      "name": "Test1",
-      "marks": "85",
-      "studentClass": "10th",
-      "id": 8
+      "studentClass": "10th"
     }
   ]
 }
