@@ -16,17 +16,19 @@ const Dashboard = () => {
   }, [allStudents]);
 
   const handleSearch = ({ roll, name, studentClass, marks }) => {
-    const filtered = allStudents.filter((student) => {
-      return (
-        (roll === "" || student.roll.toString() === roll) &&
-        (name === "" || student.name.toLowerCase().includes(name.toLowerCase())) &&
-        (studentClass === "" ||
-          student.studentClass.toLowerCase().includes(studentClass.toLowerCase())) &&
-        (marks === "" || student.marks.toString() === marks)
-      );
-    });
-    setStudents(filtered);
-  };
+  const filtered = allStudents.filter((student) => {
+    return (
+      (roll === "" || student.roll.toString().includes(roll)) &&
+      (name === "" || student.name.toLowerCase().includes(name.toLowerCase())) &&
+      (studentClass === "" ||
+        student.studentClass.toLowerCase().includes(studentClass.toLowerCase())) &&
+      (marks === "" || student.marks.toString().includes(marks))
+    );
+  });
+
+  setStudents(filtered);
+};
+
 
   return (
     <div className="page-container">
