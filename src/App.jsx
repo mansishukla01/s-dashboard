@@ -9,6 +9,8 @@ import Table from "./components/Table";
 import Dashboard from "./pages/Dashboard";
 import AddStudent from "./pages/AddStudent";
 import StudentDetails from "./pages/StudentDetails";
+import EditStudent from "./pages/EditStudent";
+
 
 
 function App() {
@@ -73,6 +75,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/add-student" element={<AddStudent />} />
         <Route path="/student-details" element={<StudentDetails />} />
+        <Route path="/edit/:id" element={<EditStudent />} />
       </Routes>
       <Footer/>
       </>
