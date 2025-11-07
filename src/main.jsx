@@ -7,11 +7,10 @@ import App from './App.jsx'
 import { StudentProvider } from './context/StudentContext'
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+  
     <BrowserRouter>
       <StudentProvider>
         <App />
       </StudentProvider>
     </BrowserRouter>
-  </StrictMode>,
 )
