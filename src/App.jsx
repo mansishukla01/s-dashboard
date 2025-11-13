@@ -43,7 +43,6 @@ function App() {
 
   return (
     <>
-  
       <Header/>
       <nav>
         <NavLink to="/" className={({ isActive }) => isActive ? 'active' : ''}>
@@ -56,7 +55,8 @@ function App() {
           Student Details
         </NavLink>
       </nav>
-
+      
+      
       <Routes>
         <Route
           path="/"

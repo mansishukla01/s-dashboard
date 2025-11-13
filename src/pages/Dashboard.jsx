@@ -1,3 +1,6 @@
+
+
+
 import React, { useEffect, useState } from "react";
 import SearchBar from "../components/SearchBar";
 import Table from "../components/Table";
@@ -5,15 +8,15 @@ import { useStudents } from "../context/StudentContext";
 import { useSearchParams } from "react-router-dom";
 
 const Dashboard = () => {
-  const { students: allStudents, fetchStudents } = useStudents();
-  const [students, setStudents] = useState([]);
+  const { students: allStudents, fetchStudents, deleteStudent } = useStudents(); 
+  const [filteredStudents, setFilteredStudents] = useState([]);
 
   const [searchParams, setSearchParams] = useSearchParams();
 
+  
   useEffect(() => {
     fetchStudents();
   }, [fetchStudents]);
-
 
   useEffect(() => {
     const roll = searchParams.get("roll") || "";
@@ -26,17 +29,17 @@ const Dashboard = () => {
         (roll === "" || student.roll.toString().includes(roll)) &&
         (name === "" || student.name.toLowerCase().includes(name.toLowerCase())) &&
         (studentClass === "" ||
-          student.studentClass.toLowerCase().includes(studentClass.toLowerCase())) &&
+          student["class"]?.toLowerCase().includes(studentClass.toLowerCase())) &&
         (marks === "" || student.marks.toString().includes(marks))
       );
     });
 
-    setStudents(filtered);
+    setFilteredStudents(filtered);
   }, [allStudents, searchParams]);
 
+  
   const handleSearch = (filters) => {
     const { roll, name, studentClass, marks } = filters;
-
     const params = {};
 
     if (roll) params.roll = roll;
@@ -45,6 +48,15 @@ const Dashboard = () => {
     if (marks) params.marks = marks;
 
     setSearchParams(params);
+  };
+
+
+  const handleDelete = async (id) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this student?");
+    if (confirmDelete) {
+      await deleteStudent(id);
+      fetchStudents(); 
+    }
   };
 
   return (
@@ -59,11 +71,9 @@ const Dashboard = () => {
           marks: searchParams.get("marks") || "",
         }}
       />
-      <Table students={students} />
+      <Table students={filteredStudents} onDelete={handleDelete} />
     </div>
   );
 };
 
 export default Dashboard;
-
-

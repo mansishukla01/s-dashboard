@@ -5,12 +5,12 @@ const Table = ({ students }) => {
   const { deleteStudent } = useStudents();
   const navigate = useNavigate();
 
-  const handleEdit = (id) => {
-    navigate(`/edit/${id}`);
+  const handleEdit = (stu) => {
+    navigate(`/edit/${stu.id}`, { state: stu });
   };
 
   const handleDelete = (id) => {
-    if (confirm("Do you really want to delete this record?")) {
+    if (confirm("Do you want to delete this record?")) {
       deleteStudent(id);
     }
   };
@@ -19,6 +19,7 @@ const Table = ({ students }) => {
     <table className="table">
       <thead>
         <tr>
+          <th>Id</th>
           <th>Roll</th>
           <th>Name</th>
           <th>Class</th>
@@ -30,22 +31,15 @@ const Table = ({ students }) => {
       <tbody>
         {students.map((stu) => (
           <tr key={stu.id}>
+            <td>{stu.id}</td>
             <td>{stu.roll}</td>
             <td>{stu.name}</td>
             <td>{stu.studentClass}</td>
             <td>{stu.marks}</td>
-            <td>
-              <button
-                className="edit-btn"
-                onClick={() => handleEdit(stu.id)}>
-                Edit
-              </button>
 
-              <button
-                className="delete-btn"
-                onClick={() => handleDelete(stu.id)}>
-                Delete
-              </button>
+            <td>
+              <button onClick={() => handleEdit(stu)}>Edit</button>
+              <button onClick={() => handleDelete(stu.id)}>Delete</button>
             </td>
           </tr>
         ))}
@@ -53,7 +47,10 @@ const Table = ({ students }) => {
     </table>
   );
 };
+
 export default Table;
+
+
 
 
 

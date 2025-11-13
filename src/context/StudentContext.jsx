@@ -51,12 +51,7 @@ export const StudentProvider = ({ children }) => {
 
   return (
     <StudentContext.Provider
-      value={{
-        students,
-        fetchStudents,
-        updateStudent,
-        deleteStudent,
-      }}>
+      value={{students,fetchStudents,updateStudent,deleteStudent}}>
       {children}
     </StudentContext.Provider>
   );

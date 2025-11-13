@@ -1,22 +1,11 @@
 {
   "students": [
     {
-      "roll": "104",
-      "name": "D",
-      "marks": "88",
-      "studentClass": "12C"
-    },
-    {
-      "roll": "901",
-      "name": "rag",
-      "marks": "90",
-      "studentClass": "10th"
-    },
-    {
-      "roll": "902",
-      "name": "test",
-      "marks": "90",
-      "studentClass": "10th"
+      "id": 3,
+      "roll": "103",
+      "name": "Aarav Singh",
+      "class": "11th",
+      "marks": 79
     }
   ]
 }

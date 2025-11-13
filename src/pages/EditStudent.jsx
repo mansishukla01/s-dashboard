@@ -1,66 +1,53 @@
-import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { useStudents } from "../context/StudentContext";
 
 const EditStudent = () => {
+  const { state } = useLocation();
   const { id } = useParams();
+  const { updateStudent } = useStudents();
   const navigate = useNavigate();
-  const { students, updateStudent } = useStudents();
 
-  const student = students.find((s) => s.id === Number(id));
-
-  const [form, setForm] = useState({
-    roll: "",
+  const [formData, setFormData] = useState({
     name: "",
+    roll: "",
     studentClass: "",
     marks: "",
   });
 
   useEffect(() => {
-    if (student) {
-      setForm(student);
+    if (state) {
+      setFormData(state);
     }
-  }, [student]);
+  }, [state]);
 
-  const handleChange = (key, value) => {
-    setForm({ ...form, [key]: value });
-  };
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    await updateStudent(Number(id), form);
-    navigate("/"); // back to dashboard
+    updateStudent(id, formData);
+    navigate("/");
   };
+  
 
   return (
-    <div className="page-container">
-      <h2>Edit Student</h2>
-
-      <form onSubmit={handleSubmit} className="edit-form">
-        <input
-          type="text"
-          value={form.roll}
-          onChange={(e) => handleChange("roll", e.target.value)}/>
-
-        <input
-          type="text"
-          value={form.name}
-          onChange={(e) => handleChange("name", e.target.value)}/>
-
-        <input
-          type="text"
-          value={form.studentClass}
-          onChange={(e) => handleChange("studentClass", e.target.value)}/>
-
-        <input
-          type="text"
-          value={form.marks}
-          onChange={(e) => handleChange("marks", e.target.value)}/>
-
-        <button type="submit">Update</button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <input
+        value={formData.name}
+        onChange={(e) => setFormData({ ...formData, name: e.target.value })}/>
+      <input
+        value={formData.roll}
+        onChange={(e) => setFormData({ ...formData, roll: e.target.value })}/>
+      <input
+        value={formData.studentClass}
+        onChange={(e) =>
+          setFormData({ ...formData, studentClass: e.target.value })
+        }/>
+      <input
+        value={formData.marks}
+        onChange={(e) => setFormData({ ...formData, marks: e.target.value })}/>
+      <button type="submit">Update</button>
+    </form>
   );
 };
 
 export default EditStudent;
+
